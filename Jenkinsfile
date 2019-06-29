@@ -26,7 +26,7 @@ pipeline {
     }  
      stage('post-to-dockerhub') {
       steps {
-        sh "docker push amrit96/snake
+        sh "docker push amrit96/snake"
       }
     }  
     stage('pull-image-server') {
