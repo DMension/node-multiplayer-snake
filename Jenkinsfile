@@ -29,7 +29,7 @@ pipeline {
      stage('post-to-dockerhub') {
       steps {
         script{
-        docker.withRegistry('https://registry.example.com', 'dockerhub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
           sh "docker push amrit96/snake"}
         }
       }
@@ -37,7 +37,7 @@ pipeline {
     stage('pull-image-server') {
       steps {
         script{
-      docker.withRegistry('https://registry.example.com', 'dockerhub') {
+      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
          sh "docker-compose down"
         sh "docker-compose up -d"}
         }
