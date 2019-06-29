@@ -28,14 +28,14 @@ pipeline {
     }  
      stage('post-to-dockerhub') {
       steps {
-        withDockerRegistry([credentialsId:"dockerhub", url: "https://registry.hub.docker.com"]){
+        docker.withRegistry('https://registry.example.com', 'dockerhub') {
         sh "docker push amrit96/snake"
         }
       }
     }  
     stage('pull-image-server') {
       steps {
-        withDockerRegistry([credentialsId:"dockerhub", url: "https://registry.hub.docker.com"]){
+      docker.withRegistry('https://registry.example.com', 'dockerhub') {
          sh "docker-compose down"
          sh "docker-compose up -d"
         }
