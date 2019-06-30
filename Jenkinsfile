@@ -23,29 +23,29 @@ pipeline {
     stage('Build-and-Tag') {
       steps {
          //sh "docker build . -t amrit96/snake"
-        script{
-        dockerImage = docker.build "amrit96/snake" + ":latest"
-        }
+       
+        dockerImage = docker.build("amrit96/snake")
+       
          echo 'build & tagging completed'
       }
     }  
      stage('post-to-dockerhub') {
       steps {
-        script{
+       
         //docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
          // sh "docker push amrit96/snake"}
-          docker.withRegistry( '', 'dockerhub' ) {
-            dockerImage.push()
-        }
+          docker.withRegistry( 'https://registry.hub.docker.com', 'dockerhub' ) {
+            dockerImage.push("latest")
+        
       }
     }  
     stage('pull-image-server') {
       steps {
-        script{
+     
       //docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-          docker.withRegistry( '', 'dockerhub' ) {
+          docker.withRegistry( 'https://registry.hub.docker.com', 'dockerhub' ) {
             dockerImage.pull()
-          }
+          
          sh "docker-compose down"
         sh "docker-compose up -d"}
         }
