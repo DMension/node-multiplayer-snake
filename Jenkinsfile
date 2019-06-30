@@ -23,7 +23,9 @@ pipeline {
     stage('Build-and-Tag') {
       steps {
          //sh "docker build . -t amrit96/snake"
+        script{
         dockerImage = docker.build "amrit96/snake" + ":latest"
+        }
          echo 'build & tagging completed'
       }
     }  
