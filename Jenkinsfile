@@ -17,10 +17,9 @@ pipeline {
       steps {
         echo '#### sast scan started #########'
         echo '#### sast scan end #############'
-  }
+      }
     }
-
-    stage('Build-and-Tag') {
+  stage('Build-and-Tag') {
       steps {
          sh "docker build . -t amrit96/snake"
          echo 'build & tagging completed'
@@ -28,16 +27,18 @@ pipeline {
     }
      stage('post-to-dockerhub') {
       steps {
+        script{
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-        sh "docker push amrit96/snake"
+          sh "docker push amrit96/snake"}
         }
       }
     }
-    stage('pull-image-server') {
+ stage('pull-image-server') {
       steps {
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        script{
+      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
          sh "docker-compose down"
-         sh "docker-compose up -d"
+        sh "docker-compose up -d"}
         }
       }
     }
