@@ -13,6 +13,7 @@ node ('ubuntu-box'){
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
             snykSecurity(tokenCredentialId: 'dd5025f7-7fb5-4d19-8511-b3e7b76885b0', failOnBuild: true, monitor: true) 
+            sh 'synk test'
 
             sh 'echo "SAST Test passed"'
         
