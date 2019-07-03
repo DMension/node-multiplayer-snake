@@ -1,6 +1,6 @@
 
-node {
-     label 'ubuntu-box'
+node ('ubuntu-box'){
+     
     def app
 
     stage('Cloning Git') {
