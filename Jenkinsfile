@@ -1,4 +1,4 @@
-agent{
+
 node {
      label 'ubuntu-box'
     def app
@@ -44,6 +44,6 @@ node {
         	}			
       }
    
-}
+
     
 }
