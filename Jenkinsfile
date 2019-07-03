@@ -1,4 +1,6 @@
+agent{
 node {
+     label 'ubuntu-box'
     def app
 
     stage('Cloning Git') {
@@ -41,6 +43,7 @@ node {
         		sh "docker-compose up -d"}
         	}			
       }
-
+   
+}
     
 }
