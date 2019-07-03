@@ -1,52 +1,46 @@
-pipeline {
-  agent {
-    label 'ubuntu'
-  }
-
- // tools {nodejs "node"}
-
-  stages {
+node {
+    def app
 
     stage('Cloning Git') {
-      steps {
-        git 'https://github.com/amritsql/node-multiplayer-snake.git'
-      }
+        /* Let's make sure we have the repository cloned to our workspace */
+
+        checkout scm
     }
 
-    stage('SAST') {
-      steps {
-        echo '#### sast scan started #########'
-        echo '#### sast scan end #############'
-      }
+    stage('Build-and-Tag') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+        app = docker.build("amrit96/snake")
     }
-  stage('Build-and-Tag') {
-      steps {
-         sh "docker build . -t amrit96/snake"
-         echo 'build & tagging completed'
-      }
+
+    stage('Test image') {
+        /* Ideally, we would run a test framework against our image.
+         * For this example, we're using a Volkswagen-type approach ;-) */
+
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
     }
-     stage('post-to-dockerhub') {
-      steps {
-        script{
+
+    stage('Post-to-dockerhub') {
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-          sh "docker push amrit96/snake"}
-        }
-      }
-    }
- stage('pull-image-server') {
-      steps {
-        script{
-      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-         sh "docker-compose down"
-        sh "docker-compose up -d"}
-        }
-      }
-    }
-    stage('DAST') {
-      steps {
-         echo 'successfully posted to dockerhub'
-      }
-    }
+            app.push("latest")
+        			}
+         }
 
-  }
+    stage('Pull-image-server') {
+
+         steps {
+       		 script{
+         		sh "docker-compose down"
+        		sh "docker-compose up -d"}
+        	}			
+      }
+
+    
 }
