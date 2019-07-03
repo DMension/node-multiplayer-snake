@@ -37,10 +37,8 @@ node ('ubuntu-box'){
 
     stage('Pull-image-server') {
 
-         app.inside {
          		sh "docker-compose down"
-        		sh "docker-compose up -d"
-        	}			
+        		sh "docker-compose up -d"			
       }
    
 
