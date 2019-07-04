@@ -10,7 +10,7 @@ node ('ubuntu-box'){
     }
      
      stage('SAST') {
-            sh 'chown -R $(whoami) ~/.npm'
+            sh 'rm -f package-lock.json'
             sh 'npm install -g snyk'
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
