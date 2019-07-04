@@ -10,7 +10,8 @@ node ('ubuntu-box'){
     }
      
      stage('SAST') {
-            sh 'sudo npm install -g snyk'
+            sh 'chown -R $(whoami) ~/.npm'
+            sh 'npm install -g snyk'
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
             snykSecurity(snykInstallation: 'synk-scan', additionalArguments: 'test', tokenCredentialId: 'dd5025f7-7fb5-4d19-8511-b3e7b76885b0', failOnBuild: true, monitor: true, severity: 'high') 
