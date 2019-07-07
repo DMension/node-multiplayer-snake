@@ -3,7 +3,7 @@ node ('ubuntu-box'){
      
      
       environment {
-           TOKEN = 'dd5025f7-7fb5-4d19-8511-b3e7b76885b0'
+           TOKEN = credentials('synk_token')
     } 
     def app
 
