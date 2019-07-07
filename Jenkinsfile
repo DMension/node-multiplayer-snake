@@ -2,9 +2,9 @@
 node ('ubuntu-box'){
      
      
-      environment {
+      /*environment {
            SNYK_TOKEN = credentials('SYNK')
-    } 
+    } */
     def app
 
     stage('Cloning Git') {
