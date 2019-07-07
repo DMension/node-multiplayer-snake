@@ -1,6 +1,10 @@
 
 node ('ubuntu-box'){
      
+     
+      environment {
+           TOKEN = ${synk_token}
+    } 
     def app
 
     stage('Cloning Git') {
