@@ -3,7 +3,7 @@ node ('ubuntu-box'){
      
      
       environment {
-           SNYK_TOKEN = credentials('synk_token')
+           SNYK_TOKEN = credentials('SYNK')
     } 
     def app
 
@@ -14,7 +14,7 @@ node ('ubuntu-box'){
     }
      
      stage('SAST') {
-          withCredentials([string(credentialsId: 'synk_token', variable: 'SYNK_TOKEN'),string(credentialsId: 'synk_token', variable: 'SYNK_TOKEN')]) {
+          withCredentials([string(credentialsId: 'SYNK', variable: 'SYNK_TOKEN'),string(credentialsId: 'SYNK', variable: 'SYNK_TOKEN')]) {
           //withCredentials([string(credentialsId: 'synk_token', variable: 'TOKEN')]) {
             sh 'rm -f package-lock.json'
             //sh 'sudo npm install -g snyk'
