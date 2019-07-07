@@ -14,7 +14,7 @@ node ('ubuntu-box'){
     }
      
      stage('SAST') {
-          withCredentials([string(credentialsId: 'SYNK', variable: 'SYNK_TOKEN'),string(credentialsId: 'SYNK', variable: 'SYNK_TOKEN')]) {
+          withCredentials([string(credentialsId: 's', variable: 'SYNK_TOKEN'),string(credentialsId: 's', variable: 'SYNK_TOKEN')]) {
           //withCredentials([string(credentialsId: 'synk_token', variable: 'TOKEN')]) {
             sh 'rm -f package-lock.json'
             //sh 'sudo npm install -g snyk'
