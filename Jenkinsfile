@@ -10,7 +10,7 @@ node ('ubuntu-box'){
     }
      
      stage('SAST') {
-          withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) {
+          withCredentials([string(credentialsId: 'synk_token', variable: 'TOKEN')]) {
             sh 'rm -f package-lock.json'
             //sh 'sudo npm install -g snyk'
         /* Ideally, we would run a test framework against our image.
