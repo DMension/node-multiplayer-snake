@@ -1,5 +1,16 @@
 pipeline {
   agent any
+  
+   triggers {
+    GenericTrigger(
+     genericVariables: [
+...
+     ],
+     token: env.SYNK
+    )
+  }
+  
+  
   stages {
     stage('Test') {
       steps {
@@ -15,7 +26,7 @@ pipeline {
       }
     }
   }
-  environment {
-    SNYK_TOKEN = credentials('SNYK')
-  }
+  //environment {
+  //  SNYK_TOKEN = credentials('SNYK')
+  //}
 }
