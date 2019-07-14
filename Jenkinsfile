@@ -2,9 +2,9 @@
 node ('ubuntu-box'){
      
      
-      /*environment {
+      environment {
            SNYK_TOKEN = credentials('SYNK')
-    } */
+    } 
     def app
 
     stage('Cloning Git') {
@@ -20,7 +20,7 @@ node ('ubuntu-box'){
             //sh 'sudo npm install -g snyk'
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
-            snykSecurity(snykInstallation: 'synk-scan', snykTokenId: env.SYNK_TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
+            snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.SYNK_TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
           
 
                sh 'echo "SAST Test passed $TOKEN"' }
