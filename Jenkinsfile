@@ -4,7 +4,6 @@ pipeline {
    triggers {
     GenericTrigger(
      genericVariables: [
-...
      ],
      token: env.SYNK
     )
