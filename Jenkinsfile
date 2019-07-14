@@ -16,6 +16,6 @@ pipeline {
     }
   }
   environment {
-    SNYK_TOKEN = credentials('SNY')
+    SNYK_TOKEN = credentials('SNYK')
   }
 }
