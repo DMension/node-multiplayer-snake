@@ -6,9 +6,9 @@ node ('ubuntu-box'){
          echo "My secret text is '${TOKEN}'"}
     
      
-      environment {
+     /* environment {
            SNYK_TOKEN = credentials('SYNK')
-    } 
+    } */
     def app
 
     stage('Cloning Git') {
