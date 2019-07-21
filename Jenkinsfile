@@ -2,15 +2,13 @@
 node ('ubuntu-box'){
      
 
-    withCredentials([string(credentialsId: 'sk', variable: 'TOKEN') { //set SECRET with the credential content
-         echo "My secret text is '${TOKEN}'"
-    }
+   
     
      
-     /* environment {
+      environment {
            SNYK_TOKEN = credentials('SYNK')
-    } */
-    //def app
+    } 
+    def app
 
     stage('Cloning Git') {
         /* Let's make sure we have the repository cloned to our workspace */
