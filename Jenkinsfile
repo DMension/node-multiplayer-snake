@@ -30,7 +30,7 @@ node ('ubuntu-box'){
                println(env.TOKEN)
             snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
           
-
+          }
                sh 'echo "SAST Test passed $TOKEN"' }
         
     
