@@ -1,6 +1,12 @@
 
 node ('ubuntu-box'){
      
+      withCredentials([string(credentialsId: 'SYNK', variable: 'TOKEN')]) {
+    sh /* WRONG! */ """
+      set +x
+      echo ${TOKEN}
+    """
+  }
      
       environment {
            SNYK_TOKEN = credentials('SYNK')
