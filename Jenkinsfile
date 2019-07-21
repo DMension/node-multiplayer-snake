@@ -21,7 +21,7 @@ node ('ubuntu-box'){
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
             
-               println(env.SYNK_TOKEN)
+               println(env.SYNK)
             snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.SYNK_TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
           
 
