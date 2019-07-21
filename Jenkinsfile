@@ -2,6 +2,9 @@
 node ('ubuntu-box'){
      
 
+      withCredentials([string(credentialsId: 'sk', variable: 'TOKEN') { //set SECRET with the credential content
+         echo "My secret text is '${TOKEN}'"
+    }
    
     
      
