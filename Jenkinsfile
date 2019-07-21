@@ -2,9 +2,9 @@
 node ('ubuntu-box'){
      
 
-      withCredentials([string(credentialsId: 'sk', variable: 'TOKEN') { //set SECRET with the credential content
+   /*   withCredentials([string(credentialsId: 'sk', variable: 'TOKEN') { //set SECRET with the credential content
          echo "My secret text is '${TOKEN}'"
-    }
+    }*/
    
     
      
@@ -21,14 +21,14 @@ node ('ubuntu-box'){
      
      stage('SAST') {
           //withCredentials([string(credentialsId: 's', variable: 'SYNK_TOKEN'),string(credentialsId: 's', variable: 'SYNK_TOKEN')]) {
-          //withCredentials([string(credentialsId: 'synk_token', variable: 'TOKEN')]) {
+          withCredentials([string(credentialsId: 'sk', variable: 'TOKEN')]) {
             sh 'rm -f package-lock.json'
             //sh 'sudo npm install -g snyk'
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
             
-               println(env.SYNK)
-            snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.SYNK_TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
+               println(env.TOKEN)
+            snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
           
 
                sh 'echo "SAST Test passed $TOKEN"' }
