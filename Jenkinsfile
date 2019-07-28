@@ -51,6 +51,7 @@ node ('ubuntu-box'){
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
         sh 'echo "amrit96/snake:latest ${WORKSPACE}/Dockerfile" > anchor_images' 
+        sh 'sleep 60'
         anchore forceAnalyze: true, name: 'anchore_images'
         }
 
