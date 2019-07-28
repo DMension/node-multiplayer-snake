@@ -15,7 +15,7 @@ node ('ubuntu-box'){
      stage('SAST') {
          
           sh 'rm -f package-lock.json'
-          build 'SNYK-SAST' 
+         // build 'SNYK-SAST' 
         /*  withCredentials([string(credentialsId: 'sk', variable: 'TOKEN')]) {
           build 'SNYK-SAST'  
             
