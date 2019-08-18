@@ -53,7 +53,7 @@ node ('ubuntu-box'){
         sh 'echo "amrit96/snake:latest ${WORKSPACE}/Dockerfile" > anchore_images' 
         sh 'chmod +x anchor_images'
         //sh 'sleep 60'
-        anchore forceAnalyze: true,engineRetries: '900', name: 'anchore_images'
+        anchore forceAnalyze: true,engineRetries: '1200', name: 'anchore_images'
         }
 
       //      sh 'echo "Image Vulnerability Test passed"'
