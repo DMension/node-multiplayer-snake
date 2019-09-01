@@ -1,5 +1,5 @@
 
-node ('ubuntu-box'){
+node ('master'){
    
       environment {
            SNYK_TOKEN = credentials('SYNK')
@@ -41,19 +41,19 @@ node ('ubuntu-box'){
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-       // docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-       //     app.push("latest")
-       // 			}
+      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("latest")
+        			}
          }
      
      stage('IMAGE-VULNERABILITY-TEST') {
         node('master'){
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
-        sh 'echo "amrit96/snake:latest ${WORKSPACE}/Dockerfile" > anchore_images' 
-        sh 'chmod +x anchor_images'
+       // sh 'echo "amrit96/snake:latest ${WORKSPACE}/Dockerfile" > anchore_images' 
+       // sh 'chmod +x anchor_images'
         //sh 'sleep 60'
-        anchore forceAnalyze: true,engineRetries: '900', name: 'anchore_images'
+       // anchore forceAnalyze: true,engineRetries: '900', name: 'anchore_images'
         }
 
       //      sh 'echo "Image Vulnerability Test passed"'
