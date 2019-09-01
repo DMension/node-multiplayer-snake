@@ -1,5 +1,5 @@
 
-node ('master'){
+node ('ubuntu'){
    
       environment {
            SNYK_TOKEN = credentials('SYNK')
