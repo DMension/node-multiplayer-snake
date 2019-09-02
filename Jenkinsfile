@@ -13,7 +13,7 @@ node ('ubuntu'){
     }
      
      stage('SAST') {
-        node('ubuntu'){
+       // node('ubuntu'){
          
           sh 'rm -f package-lock.json'
          build 'SNYK-SAST' 
@@ -23,7 +23,7 @@ node ('ubuntu'){
                println(env.TOKEN)
             snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
           
-          }*/}
+          }*/
                sh 'echo "SAST Test passed "' }
         
     
@@ -37,10 +37,10 @@ node ('ubuntu'){
 
     
    stage('IMAGE-VULNERABILITY-TEST') {
-        node('master'){
+      //  node('master'){
         
-            build 'SNYK-SAST' 
-        }
+            build 'AQUASEC-SECURITY' 
+      //  }
 
            sh 'echo "Image Vulnerability Test passed"'
         
@@ -67,7 +67,7 @@ node ('ubuntu'){
      stage('DAST') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
-
+            build 'OWASP-ZAP' 
 
             sh 'echo "DAST Test passed"'
         
