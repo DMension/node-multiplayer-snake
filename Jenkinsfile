@@ -13,6 +13,7 @@ node ('ubuntu'){
     }
      
      stage('SAST') {
+        node('ubuntu'){
          
           sh 'rm -f package-lock.json'
          build 'SNYK-SAST' 
@@ -22,7 +23,7 @@ node ('ubuntu'){
                println(env.TOKEN)
             snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
           
-          }*/
+          }*/}
                sh 'echo "SAST Test passed "' }
         
     
@@ -35,6 +36,15 @@ node ('ubuntu'){
     }
 
     
+   stage('IMAGE-VULNERABILITY-TEST') {
+        node('master'){
+        
+            build 'SNYK-SAST' 
+        }
+
+           sh 'echo "Image Vulnerability Test passed"'
+        
+    }
 
     stage('Post-to-dockerhub') {
         /* Finally, we'll push the image with two tags:
@@ -46,19 +56,7 @@ node ('ubuntu'){
         			}
          }
      
-     stage('IMAGE-VULNERABILITY-TEST') {
-        node('master'){
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-       // sh 'echo "amrit96/snake:latest ${WORKSPACE}/Dockerfile" > anchore_images' 
-       // sh 'chmod +x anchor_images'
-        //sh 'sleep 60'
-       // anchore forceAnalyze: true,engineRetries: '900', name: 'anchore_images'
-        }
-
-      //      sh 'echo "Image Vulnerability Test passed"'
-        
-    }
+     
 
     stage('Pull-image-server') {
 
