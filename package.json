@@ -11,6 +11,7 @@
     "pretest": "eslint .",
     "test": "mocha",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha",
+    "sonar": "node sonar-project.js"
     
   },
   "devDependencies": {
