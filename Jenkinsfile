@@ -33,7 +33,7 @@ node ('Ubuntu-app-agent'){
     
     stage('DAST')
         {
-        build 'SECURITY-IMAGE-SCANNER-AQUAMICROSCANNER'
+        build 'SECURITY-DAST-OWASP_ZAP'
         }
  
 }
