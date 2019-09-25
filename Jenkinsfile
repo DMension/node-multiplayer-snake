@@ -4,7 +4,9 @@ node ('Ubuntu-app-agent'){
         /* Let's make sure we have the repository cloned to our workspace */
        checkout scm
     }  
-    
+    stage('SAST'){
+        build 'SECURITY-SAST-SNYK'
+    }
 
     
     stage('Build-and-Tag') {
@@ -18,6 +20,9 @@ node ('Ubuntu-app-agent'){
             app.push("latest")
         			}
          }
+    stage('SECURITY-IMAGE-SCANNER'){
+        build 'SECURITY-IMAGE-SCANNER-AQUAMICROSCANNER'
+    }
   
     
     stage('Pull-image-server') {
@@ -25,5 +30,10 @@ node ('Ubuntu-app-agent'){
          sh "docker-compose down"
          sh "docker-compose up -d"	
       }
+    
+    stage('DAST')
+        {
+        build 'SECURITY-IMAGE-SCANNER-AQUAMICROSCANNER'
+        }
  
 }
